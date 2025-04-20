@@ -691,54 +691,40 @@ library.createSlider = function(option, parent)
         SliceCenter = Rect.new(2, 2, 62, 62),
         Parent = option.slider
     })
-    option.titleContainer = library:Create("Frame", {
-        Position = UDim2.new((option.sub or option.textpos) and 0.5 or 0, (option.sub or option.textpos) and 0 or 6, 0, 0),
-        Size = UDim2.new(1, -12, 0, (option.sub or option.textpos) and 14 or 18),
-        BackgroundTransparency = 1,
-        Parent = (option.sub or option.textpos) and option.slider or option.main
-    })
-
-    option.minusButton = library:Create("TextButton", {
-        Position = UDim2.new(0, 0, 0, 0),
-        Size = UDim2.new(0, 20, 1, 0),
-        BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-        BorderColor3 = Color3.new(),
-        Text = "-",
-        TextColor3 = Color3.fromRGB(210, 210, 210),
-        TextSize = 14,
-        Font = Enum.Font.Code,
-        Parent = option.titleContainer
-    })
 
     option.title = library:Create("TextBox", {
-        Position = UDim2.new(0.5, 0, 0, 0),
-        AnchorPoint = Vector2.new(0.5, 0),
-        Size = UDim2.new(0, 100, 1, 0),
+        Position = UDim2.new((option.sub or option.textpos) and 0.5 or 0, (option.sub or option.textpos) and 0 or 6, 0, 0),
+        Size = UDim2.new(0, 0, 0, (option.sub or option.textpos) and 14 or 18),
         BackgroundTransparency = 1,
         Text = (option.text == "nil" and "" or option.text .. ": ") .. option.value .. option.suffix,
         TextSize = (option.sub or option.textpos) and 14 or 15,
         Font = Enum.Font.Code,
         TextColor3 = Color3.fromRGB(210, 210, 210),
-        TextXAlignment = Enum.TextXAlignment.Center,
-        Parent = option.titleContainer
+        TextXAlignment = Enum.TextXAlignment[(option.sub or option.textpos) and "Center" or "Left"],
+        Parent = (option.sub or option.textpos) and option.slider or option.main
     })
 
-    option.plusButton = library:Create("TextButton", {
-        Position = UDim2.new(1, -20, 0, 0),
-        Size = UDim2.new(0, 20, 1, 0),
-        BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-        BorderColor3 = Color3.new(),
+    option.minusBtn = library:Create("TextButton", {
+        Position = UDim2.new(0, textService:GetTextSize(option.title.Text, option.title.TextSize, option.title.Font, Vector2.new(9999, 9999)).X + ((option.sub or option.textpos) and 10 or 16), 0, 0),
+        Size = UDim2.new(0, 15, 0, (option.sub or option.textpos) and 14 or 18),
+        BackgroundTransparency = 1,
+        Text = "-",
+        TextColor3 = Color3.fromRGB(210, 210, 210),
+        TextSize = (option.sub or option.textpos) and 14 or 15,
+        Font = Enum.Font.Code,
+        Parent = (option.sub or option.textpos) and option.slider or option.main
+    })
+
+    option.plusBtn = library:Create("TextButton", {
+        Position = UDim2.new(0, textService:GetTextSize(option.title.Text, option.title.TextSize, option.title.Font, Vector2.new(9999, 9999)).X + ((option.sub or option.textpos) and 25 or 31), 0, 0),
+        Size = UDim2.new(0, 15, 0, (option.sub or option.textpos) and 14 or 18),
+        BackgroundTransparency = 1,
         Text = "+",
         TextColor3 = Color3.fromRGB(210, 210, 210),
-        TextSize = 14,
+        TextSize = (option.sub or option.textpos) and 14 or 15,
         Font = Enum.Font.Code,
-        Parent = option.titleContainer
+        Parent = (option.sub or option.textpos) and option.slider or option.main
     })
-
-    if not (option.sub or option.textpos) then
-        option.titleContainer.Position = UDim2.new(0, 6, 0, 0)
-        option.title.TextXAlignment = Enum.TextXAlignment.Left
-    end
 
     table.insert(library.theme, option.fill)
 
@@ -778,11 +764,11 @@ library.createSlider = function(option, parent)
         manualInput = false
     end)
 
-    option.minusButton.MouseButton1Click:Connect(function()
+    option.minusBtn.MouseButton1Click:Connect(function()
         option:SetValue(option.value - (option.float or 1))
     end)
 
-    option.plusButton.MouseButton1Click:Connect(function()
+    option.plusBtn.MouseButton1Click:Connect(function()
         option:SetValue(option.value + (option.float or 1))
     end)
 
