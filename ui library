@@ -8,7 +8,7 @@ if getgenv().library then
     getgenv().library:Unload()
 end
 
-local library = {design = getgenv().design == "kali" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "CheatX", open = false, popup = nil, instances = {}, connections = {}, options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "hatsune", fileext = ".txt"}
+local library = {design = getgenv().design == "kali" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "hatsune", open = false, popup = nil, instances = {}, connections = {}, options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "hatsune", fileext = ".txt"}
 getgenv().library = library
 
 --Locals
@@ -705,7 +705,7 @@ library.createSlider = function(option, parent)
     })
 
     option.plusBtn = library:Create("TextButton", {
-        Position = UDim2.new(1, -15, 0, 0),
+        Position = UDim2.new(1, -15, 2, 0),
         Size = UDim2.new(0, 15, 1, 0),
         BackgroundTransparency = 1,
         Text = "+",
@@ -717,7 +717,7 @@ library.createSlider = function(option, parent)
     })
     
     option.minusBtn = library:Create("TextButton", {
-        Position = UDim2.new(1, -30, 0, 0),
+        Position = UDim2.new(1, -30, 2, 0),
         Size = UDim2.new(0, 15, 1, 0),
         BackgroundTransparency = 1,
         Text = "-",
