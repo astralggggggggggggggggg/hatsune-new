@@ -3508,4 +3508,4 @@ function Library:UpdateTheme(property)
 	Library.Theme.NotFocused = property.NotFocused
 	Library.Theme.Focused = property.Focused
 
-end
+return Library
